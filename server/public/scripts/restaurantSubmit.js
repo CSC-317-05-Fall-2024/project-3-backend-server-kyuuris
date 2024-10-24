@@ -1,13 +1,31 @@
 const handleSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
-    // Extract fields from the form, and
-    // send a request to create a new restaurant
+    const form = event.target;
 
-}
+    const name = form.name.value;
+    const phone = form.phone.value;
+    const address = form.address.value;
+    const photo = form.photo.value;
+
+    const newRestaurant = {
+        name,
+        phone,
+        address,
+        photo
+    };
+
+    fetch('/api/restaurants', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newRestaurant),
+    });
+
+};
 
 document.addEventListener('DOMContentLoaded', () => {
- 
-    // Add event listener to the form for submit events
-
+    const form = document.getElementById('new_restaurant_form');
+    form.addEventListener('submit', handleSubmit);
 });
